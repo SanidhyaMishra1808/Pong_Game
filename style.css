@@ -1,14 +1,152 @@
 body {
     text-align: center;
-    background-color: black;
+    background: linear-gradient(-45deg, #0d0d0d, #000000, #0d0d0d, #000000);
+    background-size: 400% 400%;
+    animation: gradientShift 10s infinite linear;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
-    position: fixed;
-    width: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
+    overflow: hidden;
 }
-h1{
-    color: aquamarine;
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    color: #64ffda;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 255, 255, 0.5);
+    margin-bottom: 20px;
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+h1:hover {
+    text-shadow: 2px 2px 8px rgba(0, 255, 255, 0.7);
+}
+
+canvas {
+    background-color: #222;
+    border: 2px solid #64ffda;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+canvas:hover {
+    box-shadow: 0 6px 16px rgba(0, 255, 255, 0.7);
+}
+
+.paddle {
+    background: linear-gradient(90deg, #64ffda, #00ffaa);
+    box-shadow: 0px 0px 10px #00ffaa;
+    transition: transform 0.2s ease-in-out;
+}
+
+.paddle {
+    transition: transform 0.1s linear;
+}
+
+.ball {
+    background-color: #ff6b6b;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(255, 107, 107, 0.8);
+    animation: ballGlow 0.5s infinite alternate;
+}
+
+@keyframes ballGlow {
+    0% { box-shadow: 0px 0px 10px rgba(255, 107, 107, 0.5); }
+    100% { box-shadow: 0px 0px 15px rgba(255, 107, 107, 1); }
+}
+
+.ball::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 107, 107, 0.3);
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: ballTrail 0.1s linear infinite;
+}
+
+@keyframes ballTrail {
+    from { transform: translateY(5px); opacity: 0.6; }
+    to { transform: translateY(-5px); opacity: 0; }
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: #64ffda;
+    transition: transform 0.2s ease-in-out;
+}
+
+.score.change {
+    animation: scorePop 0.3s ease-in-out;
+}
+
+@keyframes scorePop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.center-line {
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient( 
+        to bottom, 
+        rgba(255, 255, 255, 0.6) 0%, 
+        rgba(255, 255, 255, 0.6) 20%, 
+        transparent 20%, 
+        transparent 40%
+    );
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); }
+    50% { box-shadow: 0px 0px 10px rgba(255, 255, 255, 1); }
+    100% { box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); }
+}
+
+/* Responsive Canvas */
+@media (max-width: 768px) {
+    canvas {
+        width: 90%;
+        height: auto;
+    }
+    .paddle {
+        width: 15px;
+        height: 80px;
+    }
+}
+canvas.glow-effect {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 
+                0 0 80px rgba(255, 255, 255, 0.6), 
+                0 0 120px rgba(255, 255, 255, 0.4);
+    transition: box-shadow 0.3s ease-in-out;
+}
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+}
+
+.glow-effect {
+    animation: glow 0.5s ease-in-out;
 }
